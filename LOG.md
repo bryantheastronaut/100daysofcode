@@ -19,12 +19,11 @@ Next up: Add `react-bootstrap` when you get internet access again.
  ---
  #### Day 3:
 
- __Working on__
+ __Working on Pomodoro timer__
 
- Got done:
+ Got done: Created component structure in folder. Started Header.
 
- Next up:
+ Next up: SetTime component needs to be inline.
 
- Problems:
 
  ---
