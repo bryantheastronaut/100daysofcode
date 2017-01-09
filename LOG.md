@@ -8,22 +8,49 @@ accounts and save to the postgres db.
 
 Next up: Add `react-bootstrap` when you get internet access again.
 
+---
+#### Day 2:
+__Worked on DrinkUp__
+
+Got done: Added bootstrap to DrinkUp app. Created Home, Navbar, About, and stylized Signup components.
+
+Next up: Finish up styling components. Get the json back from api after you interact with the API
+
+---
+#### Day 3:
+
+__Working on Pomodoro timer__
+
+Got done: Created component structure in folder. Started Header.
+
+Next up: SetTime component needs to be inline.
+
  ---
- #### Day 2:
- __Worked on DrinkUp__
+#### Day 4:
 
- Got done: Added bootstrap to DrinkUp app. Created Home, Navbar, About, and stylized Signup components.
+__Worked on Pomodoro App__
 
- Next up: Finish up styling components. Get the json back from api after you interact with the API
+Got done: Added functionality to SetTime component. Figured out how to set up the timer.
 
- ---
- #### Day 3:
+Next up: Set up the display and counter. To display time:
 
- __Working on Pomodoro timer__
+    function timeRemaining(time) {
+      if (time < 1) return '0:00';
+      else {
+        let seconds = Math.floor((time / 1000) % 60)
+        let minutes = Math.floor((time / 1000 / 60) % 60)
+        seconds = (seconds < 10) ? `0${seconds}` : seconds;
+        console.log(`${minutes}:${seconds}`);
+      }
+    }
 
- Got done: Created component structure in folder. Started Header.
+    let tenSec = 1000 * 10;
 
- Next up: SetTime component needs to be inline.
+    setInterval(() => {
+      timeRemaining(tenSec);
+      tenSec -= 1000;
+    }, 1000);
 
+Do it like this.
 
- ---
+---
