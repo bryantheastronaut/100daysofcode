@@ -54,3 +54,13 @@ Next up: Set up the display and counter. To display time:
 Do it like this.
 
 ---
+#### Day 5:
+__Wrote a Medium blog post on Arrays vs. Linked Lists. Working on Pomodoro again__
+
+#### Day 6:
+
+__Worked on pomodoro timer. didnt get anything done. broke everything__
+
+#### Day 7
+
+__Got the timer to work! now to convert out of ms and add a pause/reset feature!__ 

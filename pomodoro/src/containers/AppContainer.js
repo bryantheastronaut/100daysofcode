@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Header} from '../components/Header';
+import {TimeDisplay} from '../components/TimeDisplay';
 
 const MINUTE = 1000 * 60;
 const SECOND = 1000;
@@ -10,9 +11,11 @@ class AppContainer extends Component {
     this.state = {
       timerLength: 0,
       completed: 0,
-      remainingTime: 0
+      timeLeft: 0
     };
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.tick = this.tick.bind(this);
   }
   handleTimeChange(x) {
     if (x === 'INC') {
@@ -28,6 +31,21 @@ class AppContainer extends Component {
       return;
     }
   }
+  startTimer() {
+    this.setState({timeLeft: this.state.timerLength});
+    process.nextTick(() => {
+      this.timerId = setInterval(() => {
+        this.tick()
+      }, SECOND);
+    });
+  }
+  tick() {
+    let {timeLeft} = this.state;
+    this.setState({timeLeft: timeLeft - SECOND});
+    if (timeLeft <= SECOND) {
+      clearInterval(this.timerId);
+    }
+  }
   render() {
     return (
       <div>
@@ -35,6 +53,7 @@ class AppContainer extends Component {
           timerLength={this.state.timerLength}
           onTimeChange={this.handleTimeChange}
         />
+      <TimeDisplay time={this.state.timeLeft} btn={this.startTimer} />
       </div>
     );
   }
