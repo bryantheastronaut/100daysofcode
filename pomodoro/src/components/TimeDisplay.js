@@ -1,5 +1,6 @@
 import React from 'react';
 import {Well} from 'react-bootstrap';
+import {convertFromMS} from '../utils';
 
 export const TimeDisplay = (props) => {
   let wellStyle = {
@@ -10,8 +11,7 @@ export const TimeDisplay = (props) => {
   };
   return (
     <Well style={wellStyle}>
-      <h2>{props.time}</h2>
-      <button onClick={() => props.btn()}>click me</button>
+      <h2>{convertFromMS(props.time)}</h2>
     </Well>
   );
 };

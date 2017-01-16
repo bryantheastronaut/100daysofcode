@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {Header} from '../components/Header';
 import {TimeDisplay} from '../components/TimeDisplay';
-
-const MINUTE = 1000 * 60;
-const SECOND = 1000;
+import {MINUTE, SECOND} from '../utils';
 
 class AppContainer extends Component {
   constructor(props) {
@@ -11,10 +9,13 @@ class AppContainer extends Component {
     this.state = {
       timerLength: 0,
       completed: 0,
+      paused: false,
       timeLeft: 0
     };
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.startTimer = this.startTimer.bind(this);
+    this.pauseTimer = this.pauseTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
     this.tick = this.tick.bind(this);
   }
   handleTimeChange(x) {
@@ -32,12 +33,26 @@ class AppContainer extends Component {
     }
   }
   startTimer() {
+    clearInterval(this.timerId);
     this.setState({timeLeft: this.state.timerLength});
     process.nextTick(() => {
       this.timerId = setInterval(() => {
         this.tick()
       }, SECOND);
     });
+  }
+  pauseTimer() {
+    this.setState({paused: !this.state.paused});
+    if (this.state.paused) {
+      this.timerId = setInterval(() => {
+        this.tick();
+      }, 1000);
+    } else { // pause
+      clearInterval(this.timerId);
+    }
+  }
+  resetTimer() {
+    this.setState({timeLeft: 999, paused: false, timerLength: 0});
   }
   tick() {
     let {timeLeft} = this.state;
@@ -52,8 +67,12 @@ class AppContainer extends Component {
         <Header
           timerLength={this.state.timerLength}
           onTimeChange={this.handleTimeChange}
+          onStartTimer={this.startTimer}
+          onPauseTimer={this.pauseTimer}
+          onResetTimer={this.resetTimer}
+          paused={this.state.paused}
         />
-      <TimeDisplay time={this.state.timeLeft} btn={this.startTimer} />
+      <TimeDisplay time={this.state.timeLeft}/>
       </div>
     );
   }
